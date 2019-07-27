@@ -8,6 +8,17 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <scripts name="Events">
+      <script>scripts\Event_Draw.gml</script>
+      <script>scripts\Event_Create.gml</script>
+      <script>scripts\Event_Step.gml</script>
+    </scripts>
+    <script>scripts\align.gml</script>
+    <script>scripts\debug.gml</script>
+    <script>scripts\color.gml</script>
+    <script>scripts\entity_create.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\controller</object>
   </objects>

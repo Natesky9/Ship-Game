@@ -18,6 +18,12 @@
     <script>scripts\debug.gml</script>
     <script>scripts\color.gml</script>
     <script>scripts\entity_create.gml</script>
+    <script>scripts\ds_get.gml</script>
+    <script>scripts\draw_entities.gml</script>
+    <script>scripts\ds_set.gml</script>
+    <script>scripts\step_entities.gml</script>
+    <script>scripts\step_keyboard.gml</script>
+    <script>scripts\Define_Entities.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\controller</object>

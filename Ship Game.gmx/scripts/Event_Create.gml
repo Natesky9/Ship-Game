@@ -2,5 +2,8 @@
 
 //initialize all startup variables here
 menu = 0
-entities = ds_list_create()
+entity_list = ds_list_create()
+ship = false
 //end startup variables
+
+

@@ -1,4 +1,9 @@
 ///Event_Draw()
+
+//
+draw_entities()
+//
+
 var selected
 
 //draw debug menu
@@ -40,21 +45,21 @@ for (var a = 1;a <= 5;a++)
         draw_rectangle(0,64,room_width,128,true)
         align(7)
         
-        if ds_list_size(entities)
-        for (var i = 0;i <ds_list_size(entities);i++)
+        if ds_list_size(entity_list)
+        for (var i = 0;i <ds_list_size(entity_list);i++)
             {
-            var get_entity = ds_list_find_value(entities,i)
+            var get_entity = ds_list_find_value(entity_list,i)
             
             draw_text((i div 4)*100,64+16*(i mod 4),"entity: " + string(get_entity))
-            debug(" i is: " + string(i))
-            debug("drawing entity in list: " + string(get_entity))
+            //debug(" i is: " + string(i))
+            //debug("drawing entity in list: " + string(get_entity))
             }
         else
             {
             color(c_black)
             align(7)
-            debug("drawing no entities")
-            draw_text(0,64,"no entities")
+            //debug("drawing no entities")
+            //draw_text(0,64,"no entities")
             }
         }
 //----------//
@@ -63,8 +68,6 @@ for (var a = 1;a <= 5;a++)
         draw_text(a*inc - text_h_off,text_v_off,"new entity")
         }
 //----------//
-    else
-    draw_text(a*inc - text_h_off,text_v_off,"tab " + string(a))
     }
 
 if menu == 2

@@ -25,6 +25,7 @@ for (var i = 0;i < entity_count;i++)
             }
         case entity.ship:
             {
+            draw_entity_ship()
             color(c_blue)
             draw_rectangle(get_x-32,get_y-32,get_x+32,get_y+32,false)
             color(c_black)

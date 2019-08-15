@@ -9,21 +9,32 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <scripts name="Define">
+      <script>scripts\Define_Entities.gml</script>
+    </scripts>
     <scripts name="Events">
       <script>scripts\Event_Draw.gml</script>
       <script>scripts\Event_Create.gml</script>
       <script>scripts\Event_Step.gml</script>
+      <scripts name="Step">
+        <script>scripts\step_entities.gml</script>
+        <script>scripts\step_keyboard.gml</script>
+      </scripts>
+      <scripts name="Draw">
+        <script>scripts\draw_entities.gml</script>
+      </scripts>
     </scripts>
     <script>scripts\align.gml</script>
     <script>scripts\debug.gml</script>
     <script>scripts\color.gml</script>
     <script>scripts\entity_create.gml</script>
     <script>scripts\ds_get.gml</script>
-    <script>scripts\draw_entities.gml</script>
     <script>scripts\ds_set.gml</script>
-    <script>scripts\step_entities.gml</script>
-    <script>scripts\step_keyboard.gml</script>
-    <script>scripts\Define_Entities.gml</script>
+    <script>scripts\view_zoom.gml</script>
+    <script>scripts\view_center.gml</script>
+    <script>scripts\view_get.gml</script>
+    <script>scripts\entity_create_ship.gml</script>
+    <script>scripts\draw_entity_ship.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\controller</object>

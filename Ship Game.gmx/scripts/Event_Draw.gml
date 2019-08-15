@@ -1,7 +1,70 @@
 ///Event_Draw()
 
+//draw grid
+var inc = view_wview[0]/room_width
+var v_inc = inc*12
+var h_inc = inc*16
+var x1 = view_get(4)
+var y1 = view_get(8)
+var x2 = view_get(6)
+var y2 = view_get(2)
+
+var y_line = y1 div 64
+var x_line = x1 div 64
+var x_start = x_line*64
+var y_start = y_line*64
+
+color(c_blue)
+draw_line(x1,y_start,x2,y_start)
+draw_line(x_start,y1,x_start,y2)
+
+
+color(c_green)
+draw_line(x1,y1,x2,y2)
+
+if keyboard_check(ord("I"))
+debug("inc is: " + string(inc))
+
+for (var v = 0;v < v_inc+1;v++)
+    {
+    color(c_green)
+    var y_line = y_start+room_height/v_inc*v*inc
+    draw_line(x1,y_line,x2,y_line)
+    }
+    
+for (var h = 0; h < h_inc+1;h++)
+    {
+    color(c_blue)
+    var x_line = x_start+room_width/(inc*16)*h*inc
+    draw_line(x_line,y1,x_line,y2)
+    }
+
+var view_size = "[" + string(view_wview[0]) + "," + string(view_hview[0])
+var view_anchor = "<"+string(x1)+","+string(y1)+" to "+string(x2)+","+string(y2)+">"
+align(1)
+draw_text(x1,y2,view_size)
+draw_text(x1,y2-32,view_anchor)
+//end drawing grid
+
+//draw mouse effect
+if mouse_check_button(mb_right)
+    {
+    color(c_red)
+    var view_x_center = view_xview[0]+view_wview[0]/2
+    var view_y_center = view_yview[0]+view_hview[0]/2
+    draw_line(view_x_center,view_y_center,mouse_x,mouse_y)
+    }
+//end draw mouse
+
 //
 draw_entities()
+if ship
+    {
+    var ship_x = ds_get(ship_id,"x")
+    var ship_y = ds_get(ship_id,"y")
+    
+    view_center(ship_x,ship_y)
+    }
 //
 
 var selected

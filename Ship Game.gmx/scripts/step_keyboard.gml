@@ -71,7 +71,7 @@ if keyboard_check_pressed(ord("4"))
     if ship == false
         {
         ship = true
-        ship_id = entity_create(mouse_x,mouse_y,entity.ship)
+        ship_id = entity_create_ship(mouse_x,mouse_y)
         exit
         }
     debug("key 4 pressed")
@@ -80,4 +80,14 @@ if keyboard_check_pressed(ord("5"))
     {
     debug("key 5 pressed")
     var new_entity = entity_create(mouse_x,mouse_y,entity.rock)
+    }
+
+//zoom keys
+if keyboard_check(ord("Q"))
+    {
+    view_zoom(1)
+    }
+if keyboard_check(ord("W"))
+    {
+    view_zoom(-1)
     }

@@ -1,7 +1,9 @@
 ///entity_create_hex_vertex_buffer(entity)
 var get_entity = argument0
+var get_vertex_buffer = map_get(get_entity,"vertex buffer")
 
 var get_grid = map_get(get_entity,"grid")
+var get_integrity = map_get(get_entity,"integrity")
 
 if is_undefined(get_grid)
     {
@@ -31,7 +33,7 @@ for (h = 0;h < get_height;h += 1)
         
         if get_grid_value
             {
-            vertex_buffer_draw_hex_tile(get_grid,get_width,get_height,new_vertex_buffer,w,h,get_grid_value)
+            vertex_buffer_draw_hex_tile(get_entity,get_width,get_height,new_vertex_buffer,w,h,get_grid_value)
             //show("drew triangle")
             }
         }
@@ -41,6 +43,8 @@ for (h = 0;h < get_height;h += 1)
 vertex_end(new_vertex_buffer)
 vertex_freeze(new_vertex_buffer)
 map_set(get_entity,"vertex buffer",new_vertex_buffer)
+if not is_undefined(get_vertex_buffer)
+    vertex_delete_buffer(get_vertex_buffer)
 //we're done here
-show("created vertex buffer!")
+//show("created vertex buffer!")
 return new_vertex_buffer

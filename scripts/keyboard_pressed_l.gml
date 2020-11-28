@@ -3,24 +3,27 @@ if not keyboard_check_pressed(ord("L"))
 exit
 
 var is_docked = map_get(myship,"docked")
-//build
-//old, move to ui_type
-/*if game_mode = mode.ship_edit
+
+switch game_mode
     {
-    var get_entity = list_get(ship_list,0)
-    var get_grid = map_get(get_entity,"grid")
-    var edit_x = map_get(get_entity,"edit x")
-    var edit_y = map_get(get_entity,"edit y")
-    
-    var inspection = verify_grid(get_grid)
-    map_set(get_entity,"layout",inspection)
-    //get current value
-    //var get_value = ds_grid_get(get_grid,edit_x,edit_y)
-    //ds_grid_set(get_grid,edit_x,edit_y,part.null)
-    exit
+    case mode.free_flight:
+        {
+        if ui_type == ui.build
+            ui_type = ui.null
+        else
+            ui_type = ui.build
+        break
+        }
+    case mode.trade_menu:
+        {
+        ui_type = ui.build
+        game_mode = mode.ship_edit
+        }
+    case mode.ship_edit:
+        {
+        break
+        }
     }
-*/
-//crafting confirm
 
 switch ui_type
     {
@@ -36,10 +39,13 @@ switch ui_type
         }
     case ui.build:
         {
-        //close the build interface
-        ui_type = ui.null
         if is_docked
-        ui_type = ui.dock
+            {
+            //ui_type = ui.dock
+            //game_mode = mode.trade_menu
+            }
+        else
+            ui_type = ui.null
         exit
         }
     case ui.dock:

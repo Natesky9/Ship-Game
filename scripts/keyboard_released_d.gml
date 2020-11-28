@@ -10,6 +10,7 @@ switch game_mode
         {
         exit
         }
+    case mode.fine_flight:
     case mode.free_flight:
         {
         map_set(get_entity,"brake",0)

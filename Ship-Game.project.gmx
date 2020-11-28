@@ -10,15 +10,18 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="Event">
+      <script>scripts\Event_Create.gml</script>
       <script>scripts\Event_Draw.gml</script>
       <script>scripts\Event_Step.gml</script>
-      <script>scripts\Event_Create.gml</script>
       <script>scripts\Event_Keyboard.gml</script>
       <script>scripts\Event_Mouse.gml</script>
       <script>scripts\Event_Draw_GUI.gml</script>
       <script>scripts\Event_Drill.gml</script>
       <script>scripts\Event_Motion.gml</script>
       <script>scripts\Event_Tractor.gml</script>
+      <script>scripts\Event_Motion_Ship.gml</script>
+      <script>scripts\Event_Damage.gml</script>
+      <script>scripts\Event_Fire.gml</script>
     </scripts>
     <scripts name="enum">
       <script>scripts\enum_side.gml</script>
@@ -47,6 +50,8 @@
       <script>scripts\hex_round.gml</script>
       <script>scripts\hex_cube_to_offset.gml</script>
       <script>scripts\grid_set.gml</script>
+      <script>scripts\set_ship_grid.gml</script>
+      <script>scripts\point_to_square_grid.gml</script>
     </scripts>
     <scripts name="inventory">
       <script>scripts\inventory_take.gml</script>
@@ -76,13 +81,16 @@
       <script>scripts\keyboard_released_u.gml</script>
       <script>scripts\keyboard_pressed_o.gml</script>
       <script>scripts\keyboard_pressed_t.gml</script>
+      <script>scripts\keyboard_pressed_h.gml</script>
+      <script>scripts\keyboard_released_h.gml</script>
     </scripts>
     <scripts name="draws">
       <script>scripts\draw_entity_shipyard.gml</script>
+      <script>scripts\draw_entity_damage.gml</script>
+      <script>scripts\draw_entity_ship.gml</script>
       <script>scripts\draw_refined.gml</script>
       <script>scripts\draw_ore.gml</script>
       <script>scripts\draw_grid.gml</script>
-      <script>scripts\draw_entity_ship.gml</script>
       <script>scripts\draw_item.gml</script>
       <script>scripts\draw_asteroid_hex.gml</script>
       <script>scripts\draw_drill.gml</script>
@@ -119,6 +127,9 @@
     <script>scripts\entity_subtract_vector.gml</script>
     <script>scripts\list_add.gml</script>
     <script>scripts\part_color.gml</script>
+    <script>scripts\add_grid_damage.gml</script>
+    <script>scripts\get_grid_damage.gml</script>
+    <script>scripts\set_grid_damage.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader0.shader</shader>

@@ -24,9 +24,11 @@ inventory_give(myship,item.oregreen,1)
 
 inventory_size = 0
 
-myshipyard = entity_create(400,400,entity.shipyard)
+myshipyard = entity_create(100,100,entity.shipyard)
 ui_type = ui.null
 
+test_ship = entity_create(400,400,entity.ship)
 rock_grid_size = 16
+ship_grid_size = 16
 
 define_recipes()

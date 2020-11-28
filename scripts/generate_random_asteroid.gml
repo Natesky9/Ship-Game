@@ -10,7 +10,9 @@ var get_y = map_get(get_entity,"y")
 var random_x,random_y
 
 var get_grid = ds_grid_create(get_width,get_height)
+var get_integrity = ds_grid_create(get_width,get_height)
 map_set(get_entity,"grid",get_grid)
+map_set(get_entity,"integrity",get_integrity)
 
 var x_center = floor(get_width/2)
 var y_center = floor(get_height/2)
@@ -27,8 +29,9 @@ repeat irandom_range(4,8)
     var get_rock_x = random_x + x_center
     var get_rock_y = random_y + y_center
     
-    
+    var random_damage = irandom_range(50,100)
     ds_grid_set_disk(get_grid,get_rock_x,get_rock_y,min_dist/2,rock_material)
+    ds_grid_set_disk(get_integrity,get_rock_x,get_rock_y,min_dist/2,random_damage)
     }
 
 var ore_material = choose(item.orered,item.oreblue,item.oregreen)
@@ -46,7 +49,9 @@ repeat 4
         }
     until valid_position
     
+    var random_damage = irandom_range(20,100)
     ds_grid_set_disk(get_grid,random_x,random_y,1,ore_material)
+    ds_grid_set_disk(get_integrity,random_x,random_y,1,random_damage)
     }
 
 

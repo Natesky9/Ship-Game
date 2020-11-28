@@ -10,3 +10,6 @@ Event_Tractor()
 
 Event_Drill()
 
+Event_Fire()
+
+Event_Damage()

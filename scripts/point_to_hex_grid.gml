@@ -1,5 +1,6 @@
 ///point_to_hex_grid(entity,x,y)
-
+//returns a hex cell based on a coordinate
+//does not return undefined if out of bounds!
 //start timer
 //var timer = get_timer()
 

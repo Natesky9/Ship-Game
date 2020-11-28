@@ -75,10 +75,15 @@ for (var ii = 0;ii < type_count;ii++)
                 draw_entity_shipyard(get_entity)
                 break
                 }
+            case entity.damage:
+                {
+                draw_entity_damage(get_entity)
+                break
+                }
             //end entity rock
             default:
                 {
-                //show("error, default draw on entity!")
+                show("error, default draw on entity!")
                 set_color(c_blue)
                 draw_circle(get_x,get_y,16,false)
                 set_color(c_black)

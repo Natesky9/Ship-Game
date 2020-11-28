@@ -1,5 +1,6 @@
-///verify_grid(grid)
-var get_grid = argument0
+///verify_grid(entity)
+var get_entity = argument0
+var get_grid = map_get(get_entity,"grid")
 var get_width = ds_grid_width(get_grid)
 var get_height = ds_grid_height(get_grid)
 
@@ -10,12 +11,13 @@ var computer_count = 0
 var hull_count = 0
 var engine_count = 0
 var gun_count = 0
+var drill_count = 0
 var cargo_count = 0
-var inspection = 0
+var layout = 0
 
-for (var h=0;h<get_height;h++)
+for (var w=0;w<get_width;w++)
     {
-    for (var w = 0;w<get_width;w++)
+    for (var h=0;h<get_height;h++)
         {
         var get_cell = ds_grid_get(temp_grid,w,h)
         if not get_cell
@@ -40,12 +42,15 @@ for (var h=0;h<get_height;h++)
             case part.gun:
                 gun_count++
                 break
+            case part.drill:
+                drill_count++
+                break
             case part.cargo:
                 {
                 //cargo might later, but for now
                 //just counts total
                 cargo_count++
-                continue
+                break
                 }
             }
         //
@@ -68,6 +73,8 @@ for (var h=0;h<get_height;h++)
         ds_list_destroy(temp_list)
         
         var y2 = y1 + chain_y -1
+        
+        
         var grid_min = ds_grid_get_min(temp_grid,x1,y1,x2,y2)
         var grid_max = ds_grid_get_max(temp_grid,x1,y1,x2,y2)
         if grid_min == grid_max
@@ -75,12 +82,12 @@ for (var h=0;h<get_height;h++)
             ds_grid_set_region(temp_grid,x1,y1,x2,y2,0)
             var get_name = enum_part(get_cell)
             show("found a " + get_name + " of size: " + string(x2-x1+1) + ":" + string(y2-y1+1))
-            var inspection_slot = array_height_2d(inspection);
-            inspection[inspection_slot,0] = get_cell
-            inspection[inspection_slot,1] = x1
-            inspection[inspection_slot,2] = y1
-            inspection[inspection_slot,3] = x2
-            inspection[inspection_slot,4] = y2
+            var inspection_slot = array_height_2d(layout);
+            layout[inspection_slot,0] = get_cell
+            layout[inspection_slot,1] = x1
+            layout[inspection_slot,2] = y1
+            layout[inspection_slot,3] = x2
+            layout[inspection_slot,4] = y2
             }
         //
         }
@@ -102,7 +109,19 @@ show("computers: " + string(computer_count))
 show("hulls: " + string(hull_count))
 show("engines: " + string(engine_count))
 show("guns: " + string(gun_count))
+show("drills: " + string(drill_count))
 show("cargo: " + string(cargo_count))
 show("/////////////////////////////")
-show(inspection)
-return inspection
+map_set(get_entity,"computer count",computer_count)
+map_set(get_entity,"hull count",hull_count)
+map_set(get_entity,"engine count",engine_count)
+map_set(get_entity,"gun count",gun_count)
+map_set(get_entity,"drill count",drill_count)
+var drill_overheat = drill_count*100
+map_set(get_entity,"drill overheat",drill_overheat)
+map_set(get_entity,"cargo count",cargo_count)
+//cargo size is 20 per tile
+var capacity = grid_count_value(get_grid,part.cargo)*20
+map_set(get_entity,"capacity",capacity)
+show(layout)
+return layout

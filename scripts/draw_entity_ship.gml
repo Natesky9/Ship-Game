@@ -8,6 +8,7 @@ var get_direction = map_get(get_entity,"direction")
 var get_heading = map_get(get_entity,"heading")
 
 var get_grid = map_get(get_entity,"grid")
+var get_integrity = map_get(get_entity,"integrity")
 var get_width = ds_grid_width(get_grid)
 var get_height = ds_grid_height(get_grid)
 //width and height are the center of the grid
@@ -25,12 +26,25 @@ for (var h=0;h<get_height;h++)
         var get_cell = ds_grid_get(get_grid,w,h)
         if get_cell
             {
-            set_color(part_color(get_cell))
             var x1 = get_x+w*16
             var y1 = get_y+h*16
             if get_cell == part.hull
-            or get_cell == part.cargo
-            draw_rectangle(x1,y1,x1+15,y1+15,false)
+                {
+                var get_cell = ds_grid_get(get_grid,w,h)
+                var get_part_color = part_color(get_cell)
+                var get_hue = color_get_hue(get_part_color)
+                var get_damage = get_grid_damage(get_entity,w,h)
+                var new_color = make_color_hsv(get_hue,255,55+get_damage*2)
+                set_color(new_color)
+                draw_rectangle(x1,y1,x1+15,y1+15,false)
+                //draw health overlay
+                if keyboard_check(vk_shift)
+                    {
+                    align(7)
+                    set_color(c_black)
+                    draw_text(x1,y1,string(get_damage))
+                    }
+                }
             //draw adjacent links
             /*for (var s = side.null+1;s < side.types;s++)
                 {
@@ -66,10 +80,22 @@ for (var g = 0;g < layout_size;g++)
     var draw_y1 = get_y + get_y1*16
     var draw_x2 = get_x + get_x2*16 + 16
     var draw_y2 = get_y + get_y2*16 + 16
-    set_color(part_color(get_part))
+        var get_cell = ds_grid_get(get_grid,get_x1,get_y1)
+        var get_part_color = part_color(get_cell)
+        var get_hue = color_get_hue(get_part_color)
+        var get_damage = get_grid_damage(get_entity,get_x1,get_y1)
+        var new_color = make_color_hsv(get_hue,255,55+get_damage*2)
+        set_color(new_color)
     draw_rectangle(draw_x1,draw_y1,draw_x2,draw_y2,false)
     set_color(c_black)
     draw_rectangle(draw_x1,draw_y1,draw_x2,draw_y2,true)
+    //draw the health of that group
+    if keyboard_check(vk_shift)
+        {
+        align(7)
+        set_color(c_black)
+        draw_text(draw_x1,draw_y1,string(get_damage))
+        }
     }
 //done drawing ship groups//
 

@@ -11,7 +11,7 @@ if game_mode = mode.ship_edit
     //get current value
     var get_value = ds_grid_get(get_grid,edit_x,edit_y)
     ds_grid_set(get_grid,edit_x,edit_y,edit_value)
-    var inspection = verify_grid(get_grid)
+    var inspection = verify_grid(get_entity)
     map_set(get_entity,"layout",inspection)
     exit
     }
@@ -28,20 +28,11 @@ switch ui_type
         }
     case ui.build:
         {
-        var get_entity = list_get(ship_list,0)
-        var get_grid = map_get(get_entity,"grid")
-        var edit_x = map_get(get_entity,"edit x")
-        var edit_y = map_get(get_entity,"edit y")
-        //get current value
-        var get_value = ds_grid_get(get_grid,edit_x,edit_y)
-        ds_grid_set(get_grid,edit_x,edit_y,edit_value)
-        var inspection = verify_grid(get_grid)
-        map_set(get_entity,"layout",inspection)
-        exit
+        break
         }
     case ui.craft:
         {
-    ui_type = ui.null
+        ui_type = ui.null
         exit
         }
     default:

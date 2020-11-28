@@ -29,6 +29,11 @@ switch game_mode
         draw_key("F","right")
         break
         }
+    case mode.trade_menu:
+        {
+        draw_key("W","Hello")
+        draw_key("R","World")
+        }
     }
 
 //draw based on the ui type
@@ -55,13 +60,14 @@ switch ui_type
         draw_key("I","prev")
         draw_key("J","place")
         draw_key("K","next")
-        draw_key("L","clear")
+        //draw_key("L","close")
         draw_key("O","return")
         break
         }
     case ui.dock:
         {
         draw_key("O","cancel")
+        draw_key("L","build")
         break
         }
     default:
@@ -77,7 +83,7 @@ switch ui_type
         draw_key("P")
         draw_key("Q")
         draw_key("R")
-        draw_key("T","spawn#debug#rock")
+        draw_key("T","spawn#rock")
         draw_key("U","drill")
         draw_key("V")
         draw_key("W")

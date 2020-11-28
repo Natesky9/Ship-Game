@@ -1,4 +1,6 @@
 ///grid_set(entity,grid,x,y,value)
+//custom grid set, used for drilling rocks
+
 var get_entity = argument0;
 var get_grid = argument1;
 var get_grid_x = argument2;
@@ -32,14 +34,15 @@ if not get_max
     }
 
 
-//update the vertex buffer
+/*update the vertex buffer
+//do I need this?
 var get_vertex_buffer = map_get(get_entity,"vertex buffer")
 if not is_undefined(get_vertex_buffer)
     {
     vertex_delete_buffer(get_vertex_buffer)
     map_set(get_entity,"vertex buffer", undefined)
     }
-
+*/
 
 switch get_type
     {
@@ -47,6 +50,7 @@ switch get_type
         {
         //don't have this yet
         //entity_create_grid_vertex_buffer(get_entity)
+        
         break
         }
     case entity.rock:

@@ -8,7 +8,7 @@ enum entity
     rock,
     item,
     shipyard,
-    bullet,
+    damage,
     types
     }
 
@@ -24,6 +24,6 @@ switch get_type
         return "item"
     case entity.shipyard:
         return "shipyard"
-    case entity.bullet:
+    case entity.damage:
         return "bullet"
     }

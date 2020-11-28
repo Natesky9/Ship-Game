@@ -3,25 +3,10 @@ if not keyboard_check_pressed(ord("O"))
 exit
 
 var get_entity = list_get(ship_list,0)
+var is_docked = map_get(get_entity,"docked")
 
 
-//build
-//old, move to ui_type
-/*if game_mode = mode.ship_edit
-    {
-    var get_entity = list_get(ship_list,0)
-    var get_grid = map_get(get_entity,"grid")
-    var edit_x = map_get(get_entity,"edit x")
-    var edit_y = map_get(get_entity,"edit y")
-    
-    var inspection = verify_grid(get_grid)
-    map_set(get_entity,"layout",inspection)
-    //get current value
-    //var get_value = ds_grid_get(get_grid,edit_x,edit_y)
-    //ds_grid_set(get_grid,edit_x,edit_y,part.null)
-    exit
-    }
-*/
+
 
 switch ui_type
     {
@@ -37,8 +22,12 @@ switch ui_type
         }
     case ui.build:
         {
-        ui_type = ui.dock
-        show("leaving edit mode")
+        if is_docked
+            {
+            ui_type = ui.dock
+            game_mode = mode.trade_menu
+            show("leaving edit mode")
+            }
         exit
         }
     case ui.dock:
@@ -49,6 +38,7 @@ switch ui_type
             {
             map_set(myship,"docked",false)
             ui_type = ui.null
+            game_mode = mode.free_flight
             exit
             }
         //
@@ -69,6 +59,7 @@ switch ui_type
                 map_set(myship,"docked",true)
                 map_set(myship,"docked to",get_shipyard)
                 ui_type = ui.build
+                game_mode = mode.ship_edit
                 exit
                 }
             }

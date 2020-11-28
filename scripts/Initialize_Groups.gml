@@ -10,12 +10,14 @@ shipyard_list = ds_list_create()
 ship_list = ds_list_create()
 rock_list = ds_list_create()
 item_list = ds_list_create()
+damage_list = ds_list_create()
 
 //entities are the types
 list_add(entity_types,shipyard_list)
 list_add(entity_types,ship_list)
 list_add(entity_types,rock_list)
 list_add(entity_types,item_list)
+list_add(entity_types,damage_list)
 
 map_list = ds_list_create()
 grid_list = ds_list_create()

@@ -36,6 +36,7 @@ if check_continuity
     }
 
 get_grid = map_get(get_entity,"grid")
+var get_integrity = map_get(get_entity,"integrity")
 
 get_width = ds_grid_width(get_grid)
 get_height = ds_grid_height(get_grid);
@@ -198,6 +199,7 @@ while list_size(population)
         {
         //create a new grid to be used later
         new_grid = ds_grid_create(get_width,get_height)
+        new_integrity = ds_grid_create(get_width,get_height)
         seed_x = int_to_coord_x(seed,grid_max)
         seed_y = int_to_coord_y(seed,grid_max)
         
@@ -205,6 +207,9 @@ while list_size(population)
         
         ds_grid_set(get_grid,seed_x,seed_y,0)
         ds_grid_set(new_grid,seed_x,seed_y,seed_value)
+        var get_old_damage = ds_grid_get(get_integrity,seed_x,seed_y)
+        ds_grid_set(get_integrity,seed_x,seed_y,0)
+        ds_grid_set(new_integrity,seed_x,seed_y,get_old_damage)
         }
     
     while list_size(to_check)
@@ -231,9 +236,7 @@ while list_size(population)
                 }
             //check if cell is empty
             if not ds_grid_get(get_grid,get_test_x,get_test_y)
-                {
                 continue
-                }
             
             //if it hasn't been checked
             if ds_list_find_index(has_checked,int_cell) < 0
@@ -248,10 +251,14 @@ while list_size(population)
                     {
                     //get what it used to be
                     get_value = ds_grid_get(get_grid,get_test_x,get_test_y)
+                    var get_damage = ds_grid_get(get_integrity,get_test_x,get_test_y)
                     //add to a grid to be used later
                     ds_grid_set(new_grid,get_test_x,get_test_y,get_value)
+                    ds_grid_set(new_integrity,get_test_x,get_test_y,get_damage)
                     //clear it from the old one
                     ds_grid_set(get_grid,get_test_x,get_test_y,0)
+                    ds_grid_set(get_grid,get_test_x,get_test_y,0)
+                    
                     }
                 }
             }
@@ -266,6 +273,7 @@ while list_size(population)
         
         //set the grid from what we made earlier
         map_set(new_entity,"grid",new_grid)
+        map_set(new_entity,"integrity",new_integrity)
         map_set(new_entity,"heading",get_heading)
         map_set(new_entity,"direction",get_direction)
         map_set(new_entity,"speed",get_speed)

@@ -1,5 +1,7 @@
 ///vertex_buffer_draw_hex_tile()
-var get_grid = argument0
+var get_entity = argument0
+var get_grid = map_get(get_entity,"grid")
+var get_integrity = map_get(get_entity,"integrity")
 var get_width = argument1
 var get_height = argument2
 var get_vertex_buffer = argument3
@@ -18,10 +20,15 @@ var neighbor2
 
 var lx_prev = lengthdir_x(rock_grid_size,0)
 var ly_prev = lengthdir_y(rock_grid_size,0)
+    var get_cell = ds_grid_get(get_grid,w,h)
+    var get_part_color = part_color(get_value)
+    var get_hue = color_get_hue(get_part_color)
+    var get_damage = get_grid_damage(get_entity,w,h)
+    var base_color = make_color_hsv(get_hue,255,55+get_damage*2)
+    set_color(base_color)
 for (i = 1;i <= 6;i += 1)
     {
     //center vertex
-    var base_color = item_color(get_value)
     var lx = lengthdir_x(rock_grid_size,i*60)
     var ly = lengthdir_y(rock_grid_size,i*60)
     

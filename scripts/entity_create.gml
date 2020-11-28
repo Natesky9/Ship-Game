@@ -11,14 +11,6 @@ map_set(new_map,"direction",0)
 map_set(new_map,"heading",0)
 map_set(new_map,"speed",0)
 map_set(new_map,"type",get_type)
-map_set(new_map,"edit x",0)
-map_set(new_map,"edit y",0)
-map_set(new_map,"grid",0)
-map_set(new_map,"docked",0)
-map_set(new_map,"thrust",0);
-map_set(new_map,"steer",0);
-map_set(new_map,"brake",0);
-map_set(new_map,"shift",0)
 map_set(new_map,"x offset",0)
 map_set(new_map,"y offset",0)
 
@@ -28,30 +20,41 @@ switch get_type
     case entity.ship:
         {
         var new_grid = ds_grid_create(7,7)
-        ds_grid_set(new_grid,3,3,part.computer)
-        ds_grid_set(new_grid,3,2,part.hull)
-        ds_grid_set(new_grid,2,3,part.cargo)
-        ds_grid_set(new_grid,4,3,part.cargo)
-        ds_grid_set(new_grid,2,4,part.engine)
-        ds_grid_set(new_grid,4,4,part.engine)
-        
         map_set(new_map,"grid",new_grid)
+        var grid_integrity = ds_grid_create(7,7)
+        map_set(new_map,"integrity",grid_integrity)
+        ds_grid_set_region(new_grid,0,0,7,7,part.hull)
+        ds_grid_set_region(grid_integrity,0,0,7,7,100)
+        ds_grid_set_region(new_grid,0,0,1,7,part.engine)
+        ds_grid_set_region(grid_integrity,0,0,1,7,100)
+        ds_grid_set_region(new_grid,5,0,7,7,part.cargo)
+        ds_grid_set_region(grid_integrity,5,0,7,7,100)
+        //set the default ship
+        set_ship_grid(new_map,3,3,part.computer)
+        set_ship_grid(new_map,3,2,part.hull)
+        set_ship_grid(new_map,2,3,part.cargo)
+        set_ship_grid(new_map,4,3,part.cargo)
+        set_ship_grid(new_map,2,4,part.engine)
+        set_ship_grid(new_map,4,4,part.engine)
+        set_ship_grid(new_map,0,0,part.drill)
+        set_ship_grid(new_map,0,1,part.drill)
         
-        //basic inventory
-        var cargo_count = grid_count_value(new_grid,part.cargo)
-        show("cargo cells: " + string(cargo_count))
-        inventory_size = cargo_count*10
-        //end basic inventory
         
         //log it
         ds_list_add(grid_list,new_grid)
-        var inspection = verify_grid(new_grid)
+        var inspection = verify_grid(new_map)
         map_set(new_map,"layout",inspection)
+        map_set(new_map,"edit x",0)
+        map_set(new_map,"edit y",0)
+        map_set(new_map,"docked",0)
+        map_set(new_map,"thrust",0)
+        map_set(new_map,"steer",0)
+        map_set(new_map,"brake",0)
         map_set(new_map,"drill",0)
         map_set(new_map,"drill progress",0)
         map_set(new_map,"drill heat",0)
-        map_set(new_map,"capacity",inventory_size)
         map_set(new_map,"cargo",0)
+        map_set(new_map,"fire",0)
         
         ds_list_add(ship_list,new_map)
         break
@@ -66,6 +69,9 @@ switch get_type
     //----------//
     case entity.rock:
         {
+        map_set(new_map,"edit x",0)
+        map_set(new_map,"edit y",0)
+        map_set(new_map,"grid",0)
         ds_list_add(rock_list,new_map)
         break
         }
@@ -74,7 +80,15 @@ switch get_type
         {
         ds_list_add(shipyard_list,new_map)
         break
-        }    //----------//
+        }
+    //----------//
+    case entity.damage:
+        {
+        map_set(new_map,"lifetime",60)
+        ds_list_add(damage_list,new_map)
+        break
+        }
+    //----------//
     default:
         {
         show("Error, no entity_create function for this type of entity!")

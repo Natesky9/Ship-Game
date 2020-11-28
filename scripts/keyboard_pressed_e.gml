@@ -17,6 +17,7 @@ switch game_mode
         map_set(get_entity,"edit y",max(0,edit_y-1))
         exit
         }
+    case mode.fine_flight:
     case mode.free_flight:
         {
         map_set(get_entity,"thrust",1)

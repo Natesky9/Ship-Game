@@ -14,6 +14,7 @@ if get_tractor
     if map_get(myship,"cargo") >= map_get(myship,"capacity")
         {
         show("Inventory is full or no inventory!")
+        show("cargo:capacity " + string(map_get(myship,"cargo"))+ string(map_get(myship,"capacity"))) 
         map_set(get_ship,"tractor",false)
         exit//exit if inventory is full
         }
@@ -29,21 +30,19 @@ if get_tractor
         var get_x = map_get(get_item,"x")
         var get_y = map_get(get_item,"y")
         
+        var dis = point_distance(get_x,get_y,get_ship,get_ship_y)
+        if dis > 1000
+        continue
        
         //move towards ship
-        var dir = point_direction(get_x,get_y,get_ship_x,get_ship_y)    
-        var x_dir = lengthdir_x(4,dir)
-        var y_dir = lengthdir_y(4,dir)
-        map_set(get_item,"x",get_x+x_dir)
-        map_set(get_item,"y",get_y+y_dir)
         
-        var distance = point_distance(get_ship_x,get_ship_y,get_x,get_y)
-        if distance < 64
+        if dis < 64
             {//add to inventory
             inventory_give(get_ship,get_type,1)
             entity_delete(get_item)
-            break
+            continue
             }
-        
+        var dir = point_direction(get_x,get_y,get_ship_x,get_ship_y)
+        entity_add_vector(get_item,.1,dir)
         }
     }

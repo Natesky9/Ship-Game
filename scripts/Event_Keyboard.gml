@@ -30,4 +30,6 @@ keyboard_pressed_k()
 keyboard_pressed_l()
 keyboard_pressed_o()
 keyboard_pressed_t()
+keyboard_pressed_h()
+keyboard_released_h()
 

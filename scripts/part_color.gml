@@ -10,7 +10,7 @@ switch get_part
         }
     case part.hull:
         {
-        return c_gray
+        return c_aqua
         }
     case part.engine:
         {
